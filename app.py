@@ -1,0 +1,23 @@
+import web
+
+from mvc.controllers.index import Index
+from mvc.controllers.contactos import contactos
+from mvc.controllers.insertar_contacto import InsertarContacto
+from mvc.controllers.ver_contacto import VerContacto
+from mvc.controllers.actualizar_contacto import ActualizarContacto
+from mvc.controllers.borrar_contacto import BorrarContacto
+
+urls = (
+    '/', 'Index',
+    '/contactos', 'contactos',
+    '/insertar_contacto', 'InsertarContacto',
+    '/ver_contacto/(.*)', 'VerContacto',
+    '/actualizar_contacto/(.*)', 'ActualizarContacto',
+    '/borrar_contacto/(.*)', 'BorrarContacto',
+    
+)
+
+app = web.application(urls, globals())
+
+if __name__ == "__main__":
+    app.run()

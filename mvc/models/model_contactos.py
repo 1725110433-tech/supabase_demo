@@ -16,24 +16,39 @@ class ModelContactos:
             print(f"ERROR 100: {error.args[0]}")
 
     def obtenerContactos(self):
+        try:
         # SELECT * FROM contactos;
-        response = self.supabase.table("contactos").select("*").execute()
-        return response.data
+            response = self.supabase.table("contactos").select("*").execute()
+            return response.data
+        
+        except Exception as error:
+            print(f"ERROR 101: {error.args[0]}")
 
     def buscarContacto(self, id_contacto: int):
-        response = self.supabase.table("contactos").select("*").eq("id_contacto", id_contacto).execute()
-        return response.data
+        try:
+
+            response = self.supabase.table("contactos").select("*").eq("id_contacto", id_contacto).execute()
+            return response.data
+
+        except Exception as error:
+            print(f"ERROR 102: {error.args[0]}")
 
     def InsertarContacto(self, nombre: str, email: str, telefono: str):
-        datos = {
-            "nombre": nombre, 
-            "email": email,
-            "telefono": telefono
-        }
-        response = self.supabase.table("contactos").insert(datos).execute()
-        return response.data 
+        try:
+        
+            datos = {
+                "nombre": nombre, 
+                "email": email,
+                "telefono": telefono
+            }
+            response = self.supabase.table("contactos").insert(datos).execute()
+            return response.data 
+        except Exception as error:
+                    print(f"ERROR 103: {error.args[0]}")
+    
 
     def BorrarContacto(self, id_contacto: int):
+
         response = self.supabase.table("contactos").delete().eq("id_contacto",id_contacto).execute()
         return response.data
 
